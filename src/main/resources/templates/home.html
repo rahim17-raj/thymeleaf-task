@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calculator{
+            display: inline-flex;
+        }
+        .calculator__keys {
+            padding: 0.5rem; /* Add some whitespace around the keys */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1px;
+            background: hsl(207, 19%, 61%);
+            height: 120px;
+            width: 300px;
+}
+        .calculator__key {
+            background: hsl(210, 25%, 95%);
+            border: 2px solid;
+            font-size: 2rem;
+            /* Playful Styles: */
+            inline-size: 60px;
+            block-size: 60px;
+            border-radius: 40px;
+            margin: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calculator__key--enter {
+            grid-column: 4 / 5;
+            grid-row: 2 / span 4;
+            background: hsl(357, 100%, 72%);
+             height: auto; /* Allow the key to span the four rows */
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>WELCOME</h1>
+    </center>
+    <div>
+        <div>
+            <a href="otp"><button>Generate OTP</button></a>
+            <span th:if="${otp}" th:text="'OTP is: '+${otp}"></span>
+        </div>
+        <br>
+        <br>
+        <div>
+            <a href="toss"><button>CoinToss</button></a>
+            <span th:if="${toss}" th:text="'Result is: '+${toss}"></span>
+        </div>
+        <br>
+        <br>
+        <div>
+            <a href="random-color"><button>GenerateRandomColorBox</button></a>
+            <div th:if="${color}" th:style="'height:150px;width:150px;border:2px solid;background-color: '+${color}"></div>
+        </div>
+        <br>
+        <br>
+        <form action="wish">
+            <input type="text" name="msg" placeholder="enter your messege">
+            <input type="color" name="color">
+            <button>Done</button>
+            <span th:if="${msg}" th:text="${msg}" th:style="'border:2px solid black;color:'+${color}"></span>
+        </form>
+        <br>
+        <br>
+        <h3><u>Calculator</u></h3>
+        <div style="display: flex; align-items: center;gap: 20px;">
+            <form action="calculator">
+                <div class="calculator">
+                    <input type="text" class="calculator__key" name="num1" th:value="${num1}">
+                    <input type="text" class="calculator__key" name="num2" th:value="${num2}">
+                </div>
+                
+                <div class="calculator__keys">
+                    <button class="calculator__key calculator__key--operator" name="opt" value="add">+</button>
+                    <button class="calculator__key calculator__key--operator" name="opt" value="sub">-</button>
+                    <button class="calculator__key calculator__key--operator" name="opt" value="mul">x</button>
+                    <button class="calculator__key calculator__key--operator" name="opt" value="div">/</button>
+                </div>
+            </form>
+            <h2><span style="border: 2px solid;" th:if="${res}" th:text="'Result: '+${res}"></span></h2>
+        </div>
+    </div>
+</body>
+</html>
