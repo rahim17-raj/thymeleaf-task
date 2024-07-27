@@ -3,88 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Interactive Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .calculator{
-            display: inline-flex;
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            padding-right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-image: url('https://softauthor.com/wp-content/uploads/2021/08/CSS-Background-Image-Full-Screen-background-size-cover-1024x845.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        h1, h3 {
+            color: #007bff;
+        }
+        h1 {
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1);
+            }
+        }
+        .container {
+            width: 100%;
+            max-width: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5); /* Adjust transparency here */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            margin-bottom: 10px;
         }
         .calculator__keys {
-            padding: 0.5rem; /* Add some whitespace around the keys */
+            padding: 0.5rem;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 1px;
-            background: hsl(207, 19%, 61%);
-            height: 120px;
-            width: 300px;
-}
+            background: #333;
+            border-radius: 10px;
+            width: 195px;
+            margin: 0 auto;
+        }
         .calculator__key {
-            background: hsl(210, 25%, 95%);
-            border: 2px solid;
-            font-size: 2rem;
-            /* Playful Styles: */
-            inline-size: 60px;
-            block-size: 60px;
-            border-radius: 40px;
+            background: #fff;
+            border: 2px solid #ccc;
+            font-size: 1rem;
+            inline-size: 40px;
+            block-size: 40px;
+            border-radius: 5px;
             margin: 0.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        .calculator__key--enter {
-            grid-column: 4 / 5;
-            grid-row: 2 / span 4;
-            background: hsl(357, 100%, 72%);
-             height: auto; /* Allow the key to span the four rows */
+        .calculator__key:hover {
+            background: #007bff;
+            color: white;
+        }
+        .calculator__key--operator {
+            background: #007bff;
+            color: white;
+        }
+        button, input[type="text"], input[type="color"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            animation: glow 1.5s infinite alternate;
+        }
+        .result {
+            font-size: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for result */
         }
     </style>
 </head>
 <body>
-    <center>
-        <h1>WELCOME</h1>
-    </center>
-    <div>
-        <div>
+    <h1>WELCOME TO THYMELEAF TASK</h1>
+    <div class="container">
+        <div class="section">
             <a href="otp"><button>Generate OTP</button></a>
-            <span th:if="${otp}" th:text="'OTP is: '+${otp}"></span>
+            <div th:if="${otp}" th:text="'OTP is: ' + ${otp}" class="result"></div>
         </div>
-        <br>
-        <br>
-        <div>
-            <a href="toss"><button>CoinToss</button></a>
-            <span th:if="${toss}" th:text="'Result is: '+${toss}"></span>
+        <div class="section">
+            <a href="toss"><button>Coin Toss</button></a>
+            <div th:if="${toss}" th:text="'Result is: ' + ${toss}" class="result"></div>
         </div>
-        <br>
-        <br>
-        <div>
-            <a href="random-color"><button>GenerateRandomColorBox</button></a>
-            <div th:if="${color}" th:style="'height:150px;width:150px;border:2px solid;background-color: '+${color}"></div>
+        <div class="section">
+            <a href="random-color"><button>Generate Random Color Box</button></a>
+            <div th:if="${color}" th:style="'height:150px;width:150px;border:2px solid;background-color: ' + ${color}" class="result"></div>
         </div>
-        <br>
-        <br>
-        <form action="wish">
-            <input type="text" name="msg" placeholder="enter your messege">
-            <input type="color" name="color">
-            <button>Done</button>
-            <span th:if="${msg}" th:text="${msg}" th:style="'border:2px solid black;color:'+${color}"></span>
-        </form>
-        <br>
-        <br>
-        <h3><u>Calculator</u></h3>
-        <div style="display: flex; align-items: center;gap: 20px;">
-            <form action="calculator">
-                <div class="calculator">
-                    <input type="text" class="calculator__key" name="num1" th:value="${num1}">
-                    <input type="text" class="calculator__key" name="num2" th:value="${num2}">
-                </div>
-                
-                <div class="calculator__keys">
-                    <button class="calculator__key calculator__key--operator" name="opt" value="add">+</button>
-                    <button class="calculator__key calculator__key--operator" name="opt" value="sub">-</button>
-                    <button class="calculator__key calculator__key--operator" name="opt" value="mul">x</button>
-                    <button class="calculator__key calculator__key--operator" name="opt" value="div">/</button>
-                </div>
+        <div class="section">
+            <form action="wish">
+                <input type="text" name="msg" placeholder="Enter your message">
+                <input type="color" name="color">
+                <button>Done</button>
             </form>
-            <h2><span style="border: 2px solid;" th:if="${res}" th:text="'Result: '+${res}"></span></h2>
+            <div th:if="${msg}" th:text="${msg}" th:style="'border:2px solid black;color:' + ${color}" class="result"></div>
+        </div>
+        <div class="section">
+            <h3><u>Calculator</u></h3>
+            <div class="calculator">
+                <form action="calculator">
+                    <input type="text" class="calculator__key" name="num1" th:value="${num1}" placeholder="Number 1">
+                    <input type="text" class="calculator__key" name="num2" th:value="${num2}" placeholder="Number 2">
+                    <div class="calculator__keys">
+                        <button class="calculator__key calculator__key--operator" name="opt" value="add">+</button>
+                        <button class="calculator__key calculator__key--operator" name="opt" value="sub">-</button>
+                        <button class="calculator__key calculator__key--operator" name="opt" value="mul">x</button>
+                        <button class="calculator__key calculator__key--operator" name="opt" value="div">/</button>
+                    </div>
+                </form>
+            </div>
+            <div th:if="${res}" th:text="'Result: ' + ${res}" class="result"></div>
         </div>
     </div>
 </body>

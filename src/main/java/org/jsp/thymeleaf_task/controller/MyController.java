@@ -36,7 +36,7 @@ public class MyController {
     @GetMapping("/random-color")
     public String getRandomColor(ModelMap map)
     {
-        List<String> color=Arrays.asList("red","blue","green","orange");
+        List<String> color=Arrays.asList("black", "white", "gray", "silver", "maroon", "red", "purple", "fushsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal","aqua");
         map.put("color", color.get(new Random().nextInt(0,color.size())));
         return "home";
     }
