@@ -45,7 +45,7 @@ public class MyController {
     public String getWish(ModelMap map,@RequestParam String msg,@RequestParam String color)
     {
         map.put("msg", msg);
-        map.put("color", color);    
+        map.put("color1", color);    
         return "home";
     }
 
